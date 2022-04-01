@@ -1,7 +1,5 @@
 import type { AWS } from '@serverless/typescript';
 
-import hello from '@functions/hello';
-
 const serverlessConfiguration: AWS = {
   service: 'cc-calculator',
   frameworkVersion: '3',
@@ -9,6 +7,7 @@ const serverlessConfiguration: AWS = {
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
+    region: 'ap-northeast-1',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -19,7 +18,27 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { hello },
+  functions: {
+    app: {
+      handler: 'src/handler.handler',
+      events: [
+        {
+          http: {
+            method: 'ANY',
+            path: "/",
+            cors: true,
+          },
+        },
+        {
+          http: {
+            method: 'ANY',
+            path: "/{any+}",
+            cors: true,
+          },
+        },
+      ],
+    },
+  },
   package: { individually: true },
   custom: {
     esbuild: {
