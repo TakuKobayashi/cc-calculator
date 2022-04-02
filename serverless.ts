@@ -25,14 +25,14 @@ const serverlessConfiguration: AWS = {
         {
           http: {
             method: 'ANY',
-            path: "/",
+            path: '/',
             cors: true,
           },
         },
         {
           http: {
             method: 'ANY',
-            path: "/{any+}",
+            path: '/{any+}',
             cors: true,
           },
         },
