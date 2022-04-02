@@ -20,7 +20,7 @@ const serverlessConfiguration: AWS = {
   // import the function via paths
   functions: {
     app: {
-      handler: 'src/handler.handler',
+      handler: 'src/app.handler',
       events: [
         {
           http: {
